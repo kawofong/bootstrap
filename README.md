@@ -1,2 +1,3 @@
-# bootstrap
+# Bootstrap
+
 Scripts for bootstrapping workstation
