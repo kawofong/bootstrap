@@ -19,6 +19,12 @@
 
 1. Refer to `windows-terminal-settings.json` in repo for Winfows Terminal configurations
 
+1. \[Optional\] Install Sublime Text 3 theme ([ref](https://www.dunebook.com/sublime-text-themes/)). In the past, I have used the boxy theme.
+
+1. Install [Lightshot](https://app.prntscr.com/en/index.html) 
+
+1. Install Todo management tool such as [Microsoft To Do](https://todo.microsoft.com/tasks/)
+
 1. Install [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
 1. Add following text to `/etc/wsl.conf` (create `wsl.conf` if it doesn't exist)
@@ -29,7 +35,8 @@
 
 1. Restart WSL 2 session
 
-1. Install [Lightshot](https://app.prntscr.com/en/index.html) 
+1. Follow [bootstrapping instructions for Linux](../linux/README.md)
+
 
 ## Reference
 
