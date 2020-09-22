@@ -6,4 +6,4 @@
     ./bootstrap-ubuntu.sh
     ```
 
-1. Refer to `.zshrc` in repo for ZSH theme, plugins, and configurations
+1. Copy `.bashrc`, `.bash_aliases`, and `.zshrc` to Linux home directory
