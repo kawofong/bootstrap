@@ -271,7 +271,7 @@ install_homebrew_formulae
 install_python_modules
 install_homebrew_casks
 install_vscode_extensions
-# configure_macos
+configure_macos
 
 info "You will have to re-login for new macOS configurations to take effect"
 info "You will have to manually configure some settings like night shift"
