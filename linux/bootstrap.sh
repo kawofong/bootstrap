@@ -32,8 +32,27 @@ set -o pipefail
 source ./logging.sh
 
 
+### Function
+##############################################################################
+
+backup_file() {
+    mv "${HOME}/$1" "${HOME}/$1.bak"
+    ln -s "${HOME}/bootstrap/$1" "${HOME}/$1"
+}
+
+setup_dotfiles() {
+    backup_file .alias
+    backup_file .bashrc
+    backup_file .gitconfig
+    backup_file .p10k.zsh
+    backup_file .zshrc
+}
+
+
 ### Runtime
 ##############################################################################
+
+setup_dotfiles
 
 # Debian/Ubuntu based systems
 if [ -f "/etc/debian_version" ]; then

@@ -1,0 +1,13 @@
+[user]
+	name = kawo123
+	email = 14829553+kawo123@users.noreply.github.com
+[github]
+	user = kawo123
+[color]
+	ui = true
+[core]
+	editor = code --wait
+[diff]
+    tool = vscode-difftool
+[difftool "vscode-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
