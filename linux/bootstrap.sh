@@ -45,6 +45,21 @@ install_oh_my_zsh() {
     fi
 }
 
+install_zsh_extensions() {
+    info "Installing zsh extensions..."
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting | zsh
+    fi
+
+    info "Zsh extensions installation completes."
+}
+
 backup_file() {
     if [ -f "${HOME}/$1" ] || [ -h "${HOME}/$1" ]; then
         mv "${HOME}/$1" "${HOME}/$1.bak"
@@ -67,13 +82,14 @@ setup_dotfiles() {
 ##############################################################################
 
 install_oh_my_zsh
+install_zsh_extensions
 setup_dotfiles
 
 
 # Debian/Ubuntu based systems
 if [ -f "/etc/debian_version" ]; then
     info "Debian/Ubuntu based systems found. Bootstrapping system..."
-    source ./bootstrap-debian.sh
+    # source ./bootstrap-debian.sh
 fi
 
 # Redhat/CentOS based systems
