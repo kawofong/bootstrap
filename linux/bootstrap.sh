@@ -43,6 +43,7 @@ install_oh_my_zsh() {
         info "Installing oh-my-zsh"
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
+    chsh -s $(which zsh) | true # always return true and proceed
 }
 
 install_zsh_extensions() {
