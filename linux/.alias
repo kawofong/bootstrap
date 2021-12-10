@@ -13,8 +13,25 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# git aliases
+# Git aliases
 alias gs='git status'
 alias gpull='git pull --ff-only'
 alias gpush='git push'
 alias gcam='git commit -am'
+
+# Docker aliases
+alias dpsa='docker ps -a'
+alias dps='docker ps'
+alias dprune='docker images prune'
+alias drmidangle='docker rmi $(docker images -f "dangling=true" -q)'
+
+# Terraform aliases
+alias tf='terraform'
+alias tfa='terraform apply'
+alias tfd='terraform destroy'
+alias tff='terraform fmt'
+alias tfi='terraform init'
+alias tfo='terraform output'
+alias tfp='terraform plan'
+alias yytfa='terraform apply -auto-approve'
+alias tfaa='terraform apply -auto-approve'
