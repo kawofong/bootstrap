@@ -78,6 +78,8 @@ ENABLE_CORRECTION="true"
 # System plugins
 plugins=(
     colored-man-pages
+    colorize
+    emoji-clock
     history
     print-alias
     zsh-autosuggestions
@@ -85,6 +87,7 @@ plugins=(
 )
 # Programming plugins
 plugins+=(
+    dotenv
     git
     npm
 )
@@ -92,6 +95,11 @@ plugins+=(
 plugins+=(
     docker
     kubectl
+    terraform
+)
+# Cloud plugins
+plugins+=(
+    gcloud
 )
 
 ZSH_DISABLE_COMPFIX=true

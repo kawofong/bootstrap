@@ -1,13 +1,20 @@
-# grep aliases
+# cat alias
+alias cat='colorize_cat' # require colorize zsh plugin
+
+# find / grep aliases
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
 
 # ls aliases
-alias ls='ls --color=auto'
+alias l='ls -lFh'
+alias la='ls -lAFh'
 alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='ls --color=auto'
+alias lr='ls -tRFh'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
