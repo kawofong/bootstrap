@@ -52,17 +52,39 @@ install_apt_packages() {
     info "Installation of apt packages complete."
 }
 
+install_docker() {
+    # Reference: https://docs.docker.com/engine/install/debian/
+    sudo apt-get remove docker docker.io containerd runc | true # ignore if don't exist
+    info "Removed old versions of docker."
+    sudo apt-get update
+    sudo apt-get install \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    info "Added Docker’s official GPG key."
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
+    https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    info "Set up the docker stable repository."
+    sudo apt update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
+    info "Docker installation complete."
+}
+
 generate_git_ssh_key() {
-    # generate ssh key
-    ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com"
-    info '##### Please see below for SSH public key: '
-    cat ~/.ssh/id_rsa.pub
-    info '##### Follow step 4 to complete: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account'
-    info '##### After you added SSH key to your GitHub account, you can run "ssh -T git@github.com" to verify your configuration.'
+    if [[ ! -f ~/.ssh/id_rsa ]]; then
+        ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com"
+        info '##### Please see below for SSH public key: '
+        cat ~/.ssh/id_rsa.pub
+        info '##### Follow step 4 to complete: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account'
+        info '##### After you added SSH key to your GitHub account, you can run "ssh -T git@github.com" to verify your configuration.'
+    fi
 }
 
 ### Runtime
 ##############################################################################
 
-install_apt_packages
+# install_apt_packages
+install_docker
 generate_git_ssh_key
