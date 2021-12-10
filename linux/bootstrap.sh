@@ -35,9 +35,23 @@ source ./logging.sh
 ### Function
 ##############################################################################
 
+install_oh_my_zsh() {
+    if [ -d "${HOME}/.oh-my-zsh" ]; then
+        info "The \$ZSH folder already exists (${HOME}/.oh-my-zsh)."
+        info "Skipping oh-my-zsh installation."
+    else
+        info "Installing oh-my-zsh"
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+}
+
 backup_file() {
-    mv "${HOME}/$1" "${HOME}/$1.bak"
-    ln -s "${HOME}/bootstrap/$1" "${HOME}/$1"
+    if [ -f "${HOME}/$1" ] || [ -h "${HOME}/$1" ]; then
+        mv "${HOME}/$1" "${HOME}/$1.bak"
+        info "${HOME}/$1 backed up."
+    fi
+    ln -s "${HOME}/bootstrap/linux/$1" "${HOME}/$1"
+    info "Setup for $1 done."
 }
 
 setup_dotfiles() {
@@ -52,7 +66,9 @@ setup_dotfiles() {
 ### Runtime
 ##############################################################################
 
+install_oh_my_zsh
 setup_dotfiles
+
 
 # Debian/Ubuntu based systems
 if [ -f "/etc/debian_version" ]; then
