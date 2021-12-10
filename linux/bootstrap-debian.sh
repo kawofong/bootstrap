@@ -44,8 +44,27 @@ PACKAGES=(
     jq
     kubectl
     lsb-release
+    nodejs
+    npm
     openjdk-11-jdk
+    # Python 3
+    python3
+    python3-pip
+    build-essential
+    libssl-dev
+    libffi-dev
+    python3-dev
+    # end Python 3
     software-properties-common
+)
+
+PYTHON_PACKAGES=(
+	autopep8
+    flake8
+    ipython
+	virtualenv
+	virtualenvwrapper
+	functions-framework
 )
 
 
@@ -57,7 +76,7 @@ install_apt_packages() {
     sudo apt update
     info "Installing apt packages..."
     sudo apt install -y "${PACKAGES[@]}"
-    info "Installation of apt packages complete."
+    info "Apt packages installation completes."
 }
 
 install_docker() {
@@ -83,11 +102,17 @@ install_google_cloud_sdk() {
     info "Google Cloud SDK installation completes."
 }
 
-install_python3() {
+install_python3_8() {
     sudo add-apt-repository ppa:deadsnakes/ppa
     info "Added deadsnakes Linux repository."
     sudo apt-get update && sudo apt-get install python3.8
     info "Python 3.8 installation completes."
+}
+
+install_python_modules() {
+    info "Installing Python modules..."
+    pip3 install --user "${PYTHON_PACKAGES[@]}"
+    info "Python modules installation completes."
 }
 
 install_terraform() {
@@ -113,8 +138,9 @@ generate_git_ssh_key() {
 ##############################################################################
 
 install_apt_packages
-# install_docker
+install_docker
 install_google_cloud_sdk
-# install_python3
-# install_terraform
+# install_python3_8 # optional. If you need python 3.8
+install_python_modules
+install_terraform
 generate_git_ssh_key
