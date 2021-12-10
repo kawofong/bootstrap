@@ -79,6 +79,7 @@ ENABLE_CORRECTION="true"
 plugins=(
     colored-man-pages
     history
+    print-alias
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
@@ -114,6 +115,13 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Zsh print-alias plugin settings
+export PRINT_ALIAS_PREFIX='  ╰─> '
+export PRINT_ALIAS_FORMAT=$'\e[1m'
+export PRINT_NON_ALIAS_FORMAT=$'\e[0m'
+export PRINT_ALIAS_IGNORE_REDEFINED_COMMANDS=true
+export PRINT_ALIAS_IGNORE_ALIASES=(my_alias my_other_alias)
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -123,8 +131,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.alias ]; then
+    . ~/.alias
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
