@@ -82,16 +82,6 @@ if ! [ -x "$(command -v git)" ]; then
     info "Successfully configured git."
 fi
 
-# Install Anaconda
-if ! [ -x "$(command -v conda)" ]; then
-    info "Downloading Anaconda installation script..."
-    wget -P /tmp https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
-    info "Running Anaconda installation script..."
-    bash /tmp/Anaconda3-2020.02-Linux-x86_64.sh
-    info "Activating conda environment..."
-    # TODO
-fi
-
 # Install Python virtualenv
 if ! [ -x "$(command -v virtualenv)" ]; then
     info "Upgrading pip..."
