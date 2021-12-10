@@ -52,8 +52,17 @@ install_apt_packages() {
     info "Installation of apt packages complete."
 }
 
+generate_git_ssh_key() {
+    # generate ssh key
+    ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com"
+    info '##### Please see below for SSH public key: '
+    cat ~/.ssh/id_rsa.pub
+    info '##### Follow step 4 to complete: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account'
+    info '##### After you added SSH key to your GitHub account, you can run "ssh -T git@github.com" to verify your configuration.'
+}
 
 ### Runtime
 ##############################################################################
 
 install_apt_packages
+generate_git_ssh_key
