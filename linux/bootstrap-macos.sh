@@ -45,42 +45,44 @@ source ./logging.sh
 
 HOMEBREW_FORMULAE=(
     bash
-	bash-completion
-	cask
-	curl
+    bash-completion
+    cask
+    curl
     dockutil
-	git
-	helm
-	jq
-	kubectl
-	node
-	python@3.9
-	terraform
-	tree
-	watch
-	wget
-	xz
-	zsh
+    git
+    helm
+    jq
+    kubectl
+    node
+    python@3.9
+    terraform
+    tree
+    watch
+    wget
+    xz
+    zsh
 )
 
 HOMEBREW_CASKS=(
-	docker
-	# google-chrome
-	google-cloud-sdk
-	iterm2
+    docker
+    # google-chrome
+    google-cloud-sdk
+    iterm2
     keepassx
-	sublime-text
+    mactex
+    microsoft-remote-desktop
+    sublime-text
     visual-studio-code
     zappy
 )
 
 PYTHON_PACKAGES=(
-	autopep8
+    autopep8
     flake8
     ipython
-	virtualenv
-	virtualenvwrapper
-	functions-framework
+    virtualenv
+    virtualenvwrapper
+    functions-framework
 )
 
 VSCODE_EXTENSIONS=(
@@ -95,25 +97,25 @@ VSCODE_EXTENSIONS=(
     wayou.vscode-todo-highlight
     # Git
     codezombiech.gitignore
-	donjayamanne.githistory
-	eamodio.gitlens
-	waderyan.gitblame
+    donjayamanne.githistory
+    eamodio.gitlens
+    waderyan.gitblame
     # Markdown
     yzhang.markdown-all-in-one
     # Web / node
-	Zignd.html-css-class-completion
-	christian-kohler.npm-intellisense
-	dbaeumer.jshint
-	eg2.vscode-npm-script
-	mohsen1.prettify-json
+    Zignd.html-css-class-completion
+    christian-kohler.npm-intellisense
+    dbaeumer.jshint
+    eg2.vscode-npm-script
+    mohsen1.prettify-json
     kamikillerto.vscode-colorize
     # Python
     ms-python.python
     # Shell
-	foxundermoon.shell-format
-	timonwong.shellcheck
+    foxundermoon.shell-format
+    timonwong.shellcheck
     # Kubernetes
-	ipedrazas.kubernetes-snippets
+    ipedrazas.kubernetes-snippets
     # Terraform
     hashicorp.terraform
     # Theme
