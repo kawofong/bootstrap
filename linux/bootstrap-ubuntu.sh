@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-#  - Bootstrap script for Ubuntu environment
+#  - [DEPRECATED] Bootstrap script for Ubuntu environment 
 #
 # Usage:
 #
