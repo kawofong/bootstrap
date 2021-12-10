@@ -124,15 +124,6 @@ install_terraform() {
     info "Terraform installation completes."
 }
 
-generate_git_ssh_key() {
-    if [[ ! -f ~/.ssh/id_rsa ]]; then
-        ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com"
-        info "##### Please see below for SSH public key: "
-        cat ~/.ssh/id_rsa.pub
-        info "##### Follow step 4 to complete: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
-        info '##### After you added SSH key to your GitHub account, you can run "ssh -T git@github.com" to verify your configuration.'
-    fi
-}
 
 ### Runtime
 ##############################################################################
@@ -143,4 +134,3 @@ install_google_cloud_sdk
 # install_python3_8 # optional. If you need python 3.8
 install_python_modules
 install_terraform
-generate_git_ssh_key

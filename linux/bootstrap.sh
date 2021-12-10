@@ -43,7 +43,7 @@ install_oh_my_zsh() {
         info "Installing oh-my-zsh"
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
-    chsh -s $(which zsh) | true # always return true and proceed
+    chsh -s $(which zsh) || true # always return true and proceed
 }
 
 install_zsh_extensions() {
@@ -78,19 +78,38 @@ setup_dotfiles() {
     backup_file .zshrc
 }
 
+generate_git_ssh_key() {
+    if [[ ! -f ~/.ssh/id_rsa ]]; then
+        info "Generating SSH key..."
+        ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com"
+        info "##### Please see below for SSH public key: "
+        cat ~/.ssh/id_rsa.pub
+        info "##### Follow step 4 to complete: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
+        info '##### After you added SSH key to your GitHub account, you can run "ssh -T git@github.com" to verify your configuration.'
+    fi
+}
+
+bootstrap_workspace() {
+    info "Bootstrapping workspace..."
+    [[ ! -d "${HOME}/Workspace" ]] && mkdir "${HOME}/Workspace"
+    info "Workspace boostrap completes."
+}
+
 
 ### Runtime
 ##############################################################################
 
+info "Bootstrap starting. You may be asked for your password (for sudo)."
 install_oh_my_zsh
 install_zsh_extensions
 setup_dotfiles
-
+generate_git_ssh_key
+bootstrap_workspace
 
 # Debian/Ubuntu based systems
 if [ -f "/etc/debian_version" ]; then
     info "Debian/Ubuntu based systems found. Bootstrapping system..."
-    # source ./bootstrap-debian.sh
+    source ./bootstrap-debian.sh
 fi
 
 # Redhat/CentOS based systems
@@ -102,9 +121,8 @@ fi
 
 # MacOS
 if [ -f "/usr/bin/sw_vers" ]; then
-    info "MacOS found."
-    error "MacOS is not supported yet."
-    exit 1
+    info "macOS found. Bootstrapping system..."
+    source ./bootstrap-macos.sh
 fi
 
 info "System bootstrap complete."
