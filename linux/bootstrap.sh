@@ -51,7 +51,7 @@ backup_file() {
         info "${HOME}/$1 backed up."
     fi
     ln -s "${HOME}/bootstrap/linux/$1" "${HOME}/$1"
-    info "Setup for $1 done."
+    info "Setup for $1 complete."
 }
 
 setup_dotfiles() {
@@ -72,7 +72,8 @@ setup_dotfiles
 
 # Debian/Ubuntu based systems
 if [ -f "/etc/debian_version" ]; then
-    info "Debian/Ubuntu based systems found."
+    info "Debian/Ubuntu based systems found. Bootstrapping system..."
+    source ./bootstrap-debian.sh
 fi
 
 # Redhat/CentOS based systems
@@ -88,3 +89,5 @@ if [ -f "/usr/bin/sw_vers" ]; then
     error "MacOS is not supported yet."
     exit 1
 fi
+
+info "System bootstrap complete."
