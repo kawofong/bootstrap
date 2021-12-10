@@ -38,13 +38,14 @@ source ./logging.sh
 PACKAGES=(
     apt-transport-https
     ca-certificates
-    software-properties-common
     curl
     git-all
     gnupg
     jq
     kubectl
     lsb-release
+    openjdk-11-jdk
+    software-properties-common
 )
 
 
@@ -82,6 +83,13 @@ install_google_cloud_sdk() {
     info "Google Cloud SDK installation completes."
 }
 
+install_python3() {
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    info "Added deadsnakes Linux repository."
+    sudo apt-get update && sudo apt-get install python3.8
+    info "Python 3.8 installation completes."
+}
+
 install_terraform() {
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
     info "Added the HashiCorp GPG key."
@@ -107,5 +115,6 @@ generate_git_ssh_key() {
 install_apt_packages
 # install_docker
 install_google_cloud_sdk
+# install_python3
 # install_terraform
 generate_git_ssh_key
