@@ -89,7 +89,6 @@ VSCODE_EXTENSIONS=(
     # General
     ms-vscode-remote.remote-ssh
     shan.code-settings-sync
-    coenraads.bracket-pair-colorizer-2
     EditorConfig.EditorConfig
     HookyQR.beautify
     christian-kohler.path-intellisense
