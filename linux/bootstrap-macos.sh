@@ -71,6 +71,7 @@ HOMEBREW_CASKS=(
     keepassx
     mactex
     microsoft-remote-desktop
+    postman
     sublime-text
     visual-studio-code
     zappy
