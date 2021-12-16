@@ -116,6 +116,7 @@ VSCODE_EXTENSIONS=(
     timonwong.shellcheck
     # Kubernetes
     ipedrazas.kubernetes-snippets
+    ms-azuretools.vscode-docker
     # Terraform
     hashicorp.terraform
     # Theme
