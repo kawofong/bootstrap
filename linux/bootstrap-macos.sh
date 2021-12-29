@@ -33,12 +33,10 @@ set -o pipefail
 # Turn on traces, useful while debugging but commented out by default
 # set -o xtrace
 
-
 ### Import
 ##############################################################################
 
 source ./logging.sh
-
 
 ### Variable
 ##############################################################################
@@ -124,7 +122,6 @@ VSCODE_EXTENSIONS=(
     pkief.material-icon-theme
 )
 
-
 ### Function
 ##############################################################################
 
@@ -174,6 +171,35 @@ install_homebrew_casks() {
     info "Homebrew casks installation completes."
 }
 
+install_oh_my_zsh() {
+    if [ -d "${HOME}/.oh-my-zsh" ]; then
+        info "The \$ZSH folder already exists (${HOME}/.oh-my-zsh)."
+        info "Skipping oh-my-zsh installation."
+    else
+        info "Installing oh-my-zsh"
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+    chsh -s $(which zsh) || true # always return true and proceed
+}
+
+install_zsh_extensions() {
+    info "Installing zsh extensions..."
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/print-alias" ]; then
+        git clone https://github.com/brymck/print-alias ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/print-alias | zsh
+    fi
+
+    info "Zsh extensions installation completes."
+}
+
 install_python_modules() {
     info "Installing Python modules..."
     pip3 install --user "${PYTHON_PACKAGES[@]}"
@@ -205,7 +231,7 @@ configure_macos() {
     # Always show scrollbars
     defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-    # Set trackpad speed 
+    # Set trackpad speed
     defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1.5
 
     # Show filename extensions by default
@@ -259,13 +285,14 @@ configure_macos() {
     info "macOS configuration completes."
 }
 
-
 ### Runtime
 ##############################################################################
 
 setup_macos
 install_homebrew
 install_homebrew_formulae
+install_oh_my_zsh
+install_zsh_extensions
 install_python_modules
 install_homebrew_casks
 install_vscode_extensions

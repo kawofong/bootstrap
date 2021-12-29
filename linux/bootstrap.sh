@@ -20,44 +20,13 @@ set -o pipefail
 # Turn on traces, useful while debugging but commented out by default
 # set -o xtrace
 
-
 ### Import
 ##############################################################################
 
 source ./logging.sh
 
-
 ### Function
 ##############################################################################
-
-install_oh_my_zsh() {
-    if [ -d "${HOME}/.oh-my-zsh" ]; then
-        info "The \$ZSH folder already exists (${HOME}/.oh-my-zsh)."
-        info "Skipping oh-my-zsh installation."
-    else
-        info "Installing oh-my-zsh"
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    fi
-    chsh -s $(which zsh) || true # always return true and proceed
-}
-
-install_zsh_extensions() {
-    info "Installing zsh extensions..."
-    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k | zsh
-    fi
-    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
-        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions | zsh
-    fi
-    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting | zsh
-    fi
-    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/print-alias" ]; then
-        git clone https://github.com/brymck/print-alias ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/print-alias | zsh
-    fi
-
-    info "Zsh extensions installation completes."
-}
 
 backup_file() {
     if [ -f "${HOME}/$1" ] || [ -h "${HOME}/$1" ]; then
@@ -93,13 +62,10 @@ bootstrap_workspace() {
     info "Workspace boostrap completes."
 }
 
-
 ### Runtime
 ##############################################################################
 
 info "Bootstrap starting. You may be asked for your password (for sudo)."
-install_oh_my_zsh
-install_zsh_extensions
 setup_dotfiles
 generate_git_ssh_key
 bootstrap_workspace

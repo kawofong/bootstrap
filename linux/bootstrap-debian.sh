@@ -20,12 +20,10 @@ set -o pipefail
 # Turn on traces, useful while debugging but commented out by default
 # set -o xtrace
 
-
 ### Import
 ##############################################################################
 
 source ./logging.sh
-
 
 ### Variable
 ##############################################################################
@@ -51,17 +49,17 @@ PACKAGES=(
     python3-dev
     # end Python 3
     software-properties-common
+    zsh
 )
 
 PYTHON_PACKAGES=(
-	autopep8
+    autopep8
     flake8
     ipython
-	virtualenv
-	virtualenvwrapper
-	functions-framework
+    virtualenv
+    virtualenvwrapper
+    functions-framework
 )
-
 
 ### Function
 ##############################################################################
@@ -74,6 +72,35 @@ install_apt_packages() {
     info "Apt packages installation completes."
 }
 
+install_oh_my_zsh() {
+    if [ -d "${HOME}/.oh-my-zsh" ]; then
+        info "The \$ZSH folder already exists (${HOME}/.oh-my-zsh)."
+        info "Skipping oh-my-zsh installation."
+    else
+        info "Installing oh-my-zsh"
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+    chsh -s $(which zsh) || true # always return true and proceed
+}
+
+install_zsh_extensions() {
+    info "Installing zsh extensions..."
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting | zsh
+    fi
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/print-alias" ]; then
+        git clone https://github.com/brymck/print-alias ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/print-alias | zsh
+    fi
+
+    info "Zsh extensions installation completes."
+}
+
 install_docker() {
     # Reference: https://docs.docker.com/engine/install/debian/
     sudo apt-get remove docker docker.io containerd runc | true # ignore if don't exist
@@ -81,7 +108,7 @@ install_docker() {
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     info "Added Docker’s official GPG key."
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-    https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
     info "Set up the docker stable repository."
     sudo apt update
     sudo apt-get install docker-ce docker-ce-cli containerd.io
@@ -119,11 +146,12 @@ install_terraform() {
     info "Terraform installation completes."
 }
 
-
 ### Runtime
 ##############################################################################
 
 install_apt_packages
+install_oh_my_zsh
+install_zsh_extensions
 install_docker
 install_google_cloud_sdk
 # install_python3_8 # optional. If you need python 3.8
