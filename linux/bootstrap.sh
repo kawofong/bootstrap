@@ -48,7 +48,7 @@ setup_dotfiles() {
 generate_git_ssh_key() {
     if [[ ! -f ~/.ssh/id_rsa ]]; then
         info "Generating SSH key..."
-        ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com"
+        ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com" -f ~/.ssh/id_rsa -N ""
         info "##### Please see below for SSH public key: "
         cat ~/.ssh/id_rsa.pub
         info "##### Follow step 4 to complete: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
@@ -66,14 +66,18 @@ bootstrap_workspace() {
 ##############################################################################
 
 info "Bootstrap starting. You may be asked for your password (for sudo)."
-setup_dotfiles
 generate_git_ssh_key
 bootstrap_workspace
 
 # Debian/Ubuntu based systems
 if [ -f "/etc/debian_version" ]; then
-    info "Debian/Ubuntu based systems found. Bootstrapping system..."
-    source ./bootstrap-debian.sh
+    if grep -q "Raspbian" /etc/os-release; then
+        info "Raspbian systems found. Bootstrapping system..."
+        source ./bootstrap-raspbian.sh
+    else
+        info "Debian/Ubuntu based systems found. Bootstrapping system..."
+        # source ./bootstrap-debian.sh
+    fi
 fi
 
 # Redhat/CentOS based systems
@@ -89,4 +93,5 @@ if [ -f "/usr/bin/sw_vers" ]; then
     source ./bootstrap-macos.sh
 fi
 
+setup_dotfiles
 info "System bootstrap complete."

@@ -29,17 +29,11 @@ source ./logging.sh
 ##############################################################################
 
 PACKAGES=(
-    apt-transport-https
-    ca-certificates
     curl
     git-all
-    gnupg
     jq
-    kubectl
-    lsb-release
     nodejs
     npm
-    openjdk-11-jdk
     # Python 3
     python3
     python3-pip
@@ -48,7 +42,6 @@ PACKAGES=(
     libffi-dev
     python3-dev
     # end Python 3
-    software-properties-common
     zsh
 )
 
@@ -58,7 +51,6 @@ PYTHON_PACKAGES=(
     ipython
     virtualenv
     virtualenvwrapper
-    functions-framework
 )
 
 ### Function
@@ -115,35 +107,10 @@ install_docker() {
     info "Docker installation completes."
 }
 
-install_google_cloud_sdk() {
-    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-    info "Added Google Cloud SDK distribution URI as a package source."
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-    info "Imported the Google Cloud public key."
-    sudo apt-get update && sudo apt-get install google-cloud-sdk
-    info "Google Cloud SDK installation completes."
-}
-
-install_python3_8() {
-    sudo add-apt-repository ppa:deadsnakes/ppa
-    info "Added deadsnakes Linux repository."
-    sudo apt-get update && sudo apt-get install python3.8
-    info "Python 3.8 installation completes."
-}
-
 install_python_modules() {
     info "Installing Python modules..."
     pip3 install --user "${PYTHON_PACKAGES[@]}"
     info "Python modules installation completes."
-}
-
-install_terraform() {
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    info "Added the HashiCorp GPG key."
-    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    info "Added the official HashiCorp Linux repository."
-    sudo apt-get update && sudo apt-get install terraform
-    info "Terraform installation completes."
 }
 
 ### Runtime
@@ -153,7 +120,4 @@ install_apt_packages
 install_oh_my_zsh
 install_zsh_extensions
 install_docker
-install_google_cloud_sdk
-# install_python3_8 # optional. If you need python 3.8
 install_python_modules
-install_terraform
