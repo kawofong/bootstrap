@@ -1,5 +1,5 @@
 # cat alias
-alias cat='colorize_cat' # require colorize zsh plugin
+alias ccat='colorize_cat' # require colorize zsh plugin
 
 # find / grep aliases
 alias fd='find . -type d -name'
