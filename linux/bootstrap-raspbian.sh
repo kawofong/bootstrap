@@ -42,6 +42,7 @@ PACKAGES=(
     libssl-dev
     libffi-dev
     python3-dev
+    python3-rpi.gpio
     # end Python 3
     zsh
 )
@@ -52,6 +53,36 @@ PYTHON_PACKAGES=(
     ipython
     virtualenv
     virtualenvwrapper
+)
+
+VSCODE_EXTENSIONS=(
+    # General
+    shan.code-settings-sync
+    EditorConfig.EditorConfig
+    HookyQR.beautify
+    christian-kohler.path-intellisense
+    visualstudioexptteam.vscodeintellicode
+    wayou.vscode-todo-highlight
+    # Git
+    codezombiech.gitignore
+    donjayamanne.githistory
+    eamodio.gitlens
+    # Markdown
+    yzhang.markdown-all-in-one
+    # Web / node
+    christian-kohler.npm-intellisense
+    dbaeumer.jshint
+    eg2.vscode-npm-script
+    mohsen1.prettify-json
+    kamikillerto.vscode-colorize
+    # Python
+    ms-python.python
+    # Shell
+    foxundermoon.shell-format
+    timonwong.shellcheck
+    # Theme
+    nimda.deepdark-material
+    pkief.material-icon-theme
 )
 
 ### Function
@@ -114,6 +145,16 @@ install_python_modules() {
     info "Python modules installation completes."
 }
 
+install_vscode_extensions() {
+    if hash code &>/dev/null; then
+        info "Installing VS Code extensions..."
+        for i in "${VSCODE_EXTENSIONS[@]}"; do
+            code --install-extension "$i"
+        done
+        info "VS Code extensions installation completes."
+    fi
+}
+
 ### Runtime
 ##############################################################################
 
@@ -122,3 +163,4 @@ install_oh_my_zsh
 install_zsh_extensions
 install_docker
 install_python_modules
+install_vscode_extensions
