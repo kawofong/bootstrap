@@ -87,6 +87,7 @@ PYTHON_PACKAGES=(
 VSCODE_EXTENSIONS=(
     # General
     ms-vscode-remote.remote-ssh
+    ms-vsliveshare.vsliveshare
     shan.code-settings-sync
     EditorConfig.EditorConfig
     HookyQR.beautify
@@ -109,6 +110,7 @@ VSCODE_EXTENSIONS=(
     kamikillerto.vscode-colorize
     # Python
     ms-python.python
+    ms-python.vscode-pylance
     # Shell
     foxundermoon.shell-format
     timonwong.shellcheck

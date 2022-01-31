@@ -25,6 +25,7 @@ alias gs='git status'
 alias gpull='git pull --ff-only'
 alias gpush='git push'
 alias gcam='git commit -am'
+alias gdlb='git branch --merged | grep -i kawofong | xargs git branch -d'
 
 # Docker aliases
 alias dpsa='docker ps -a'
