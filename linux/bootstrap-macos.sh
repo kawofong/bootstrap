@@ -86,12 +86,13 @@ PYTHON_PACKAGES=(
 
 VSCODE_EXTENSIONS=(
     # General
+    christian-kohler.path-intellisense
+    EditorConfig.EditorConfig
     ms-vscode-remote.remote-ssh
     ms-vsliveshare.vsliveshare
     shan.code-settings-sync
-    EditorConfig.EditorConfig
     HookyQR.beautify
-    christian-kohler.path-intellisense
+    tomoki1207.pdf
     visualstudioexptteam.vscodeintellicode
     wayou.vscode-todo-highlight
     # Git
