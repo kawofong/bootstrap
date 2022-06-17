@@ -52,7 +52,8 @@ HOMEBREW_FORMULAE=(
     jq
     kubectl
     node
-    python@3.9
+    pyenv
+    python@3.10
     terraform
     tree
     watch

@@ -11,3 +11,5 @@
     tool = vscode-difftool
 [difftool "vscode-difftool"]
     cmd = code --wait --diff $LOCAL $REMOTE
+[push]
+	autoSetupRemote = true
