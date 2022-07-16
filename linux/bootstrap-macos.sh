@@ -45,6 +45,7 @@ HOMEBREW_FORMULAE=(
     bash
     bash-completion
     cask
+    commitizen
     curl
     dockutil
     git
