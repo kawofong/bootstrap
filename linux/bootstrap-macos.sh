@@ -53,8 +53,8 @@ HOMEBREW_FORMULAE=(
     jq
     kubectl
     node
+    poetry
     pyenv
-    python@3.10
     terraform
     tree
     watch
@@ -71,7 +71,6 @@ HOMEBREW_CASKS=(
     keepassx
     mactex
     microsoft-remote-desktop
-    pipenv
     postman
     sublime-text
     visual-studio-code
