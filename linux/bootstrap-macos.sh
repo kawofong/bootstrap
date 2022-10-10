@@ -55,6 +55,7 @@ HOMEBREW_FORMULAE=(
     node
     poetry
     pyenv
+    ruby
     terraform
     tree
     watch
