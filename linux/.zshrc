@@ -150,3 +150,7 @@ unsetopt correct_all
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Add gcloud components to PATH
+# Reference: https://formulae.brew.sh/cask/google-cloud-sdk
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
