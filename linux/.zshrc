@@ -151,6 +151,10 @@ unsetopt correct_all
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
+# Add homebrew keg-only openjdk to PATH
+# Reference: https://formulae.brew.sh/formula/openjdk
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
 # Add gcloud components to PATH
 # Reference: https://formulae.brew.sh/cask/google-cloud-sdk
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"

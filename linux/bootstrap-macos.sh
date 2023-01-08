@@ -53,6 +53,7 @@ HOMEBREW_FORMULAE=(
     jq
     kubectl
     node
+    openjdk
     poetry
     pyenv
     ruby
