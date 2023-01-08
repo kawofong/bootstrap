@@ -52,6 +52,7 @@ HOMEBREW_FORMULAE=(
     helm
     jq
     kubectl
+    maven
     node
     openjdk
     poetry
