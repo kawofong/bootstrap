@@ -1,0 +1,50 @@
+{
+    "workbench.colorTheme": "Deepdark Material Theme | Default Version",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.bracketPairColorization.enabled": true,
+    "editor.linkedEditing": true,
+    "editor.suggestSelection": "first",
+    "editor.wordWrap": "off",
+    "editor.wordWrapColumn": 80,
+    "git.autofetch": true,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "workbench.iconTheme": "deepdark-material-icons",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.autoSave": "onWindowChange",
+    "git.inputValidationSubjectLength": 72,
+    "workbench.editor.highlightModifiedTabs": true,
+    "explorer.sortOrder": "type",
+    "files.trimTrailingWhitespace": true,
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "markdown.extension.orderedList.autoRenumber": false,
+    "editorconfig.generateAuto": false,
+    "markdown.extension.orderedList.marker": "one",
+    "markdown.extension.tableFormatter.enabled": false,
+    "python.formatting.autopep8Args": [
+        "--max-line-length",
+        "80",
+        "--experimental"
+    ],
+    "python.linting.mypyEnabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.pylintEnabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.zoomLevel": 1,
+    "[python]": {
+        "editor.formatOnType": true
+    }
+}

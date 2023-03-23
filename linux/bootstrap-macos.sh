@@ -69,7 +69,7 @@ HOMEBREW_FORMULAE=(
 
 HOMEBREW_CASKS=(
     docker
-    # google-chrome
+    google-chrome
     google-cloud-sdk
     iterm2
     keepassx
@@ -87,13 +87,13 @@ PYTHON_PACKAGES=(
     ipython
     virtualenv
     virtualenvwrapper
-    functions-framework
 )
 
 VSCODE_EXTENSIONS=(
     # General
     christian-kohler.path-intellisense
     EditorConfig.EditorConfig
+    ms-vscode-remote.remote-containers
     ms-vscode-remote.remote-ssh
     ms-vsliveshare.vsliveshare
     shan.code-settings-sync
