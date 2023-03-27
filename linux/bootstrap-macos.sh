@@ -209,6 +209,13 @@ install_zsh_extensions() {
     info "Zsh extensions installation completes."
 }
 
+install_python() {
+    PYTHON_VERSION=3.10
+    info "Installing Python ${PYTHON_VERSION} using pyenv..."
+    pyenv install ${PYTHON_VERSION} && pyenv global ${PYTHON_VERSION}
+    info "Python installation completes."
+}
+
 install_python_modules() {
     info "Installing Python modules..."
     pip3 install --user "${PYTHON_PACKAGES[@]}"
@@ -302,6 +309,7 @@ install_homebrew
 install_homebrew_formulae
 install_oh_my_zsh
 install_zsh_extensions
+install_python
 install_python_modules
 install_homebrew_casks
 install_vscode_extensions
