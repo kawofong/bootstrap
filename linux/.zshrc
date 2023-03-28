@@ -147,9 +147,18 @@ fi
 # Disable autocorrect
 unsetopt correct_all
 
+# Add Homebrew to PATH after installation
+# Reference: https://docs.brew.sh/Installation
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Set up your shell environment for Pyenv
+# Reference: https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Add homebrew keg-only openjdk to PATH
 # Reference: https://formulae.brew.sh/formula/openjdk

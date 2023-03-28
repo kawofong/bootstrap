@@ -52,9 +52,6 @@ HOMEBREW_FORMULAE=(
     helm
     jq
     kubectl
-    maven
-    node
-    openjdk
     poetry
     pyenv
     ruby
@@ -135,23 +132,25 @@ VSCODE_EXTENSIONS=(
 ##############################################################################
 
 setup_macos() {
+    # TODO: these directories do not exist in fresh install
     # Change ownership of these directories to your user
-    sudo chown -R $(whoami) /usr/local/bin \
-        /usr/local/etc \
-        /usr/local/sbin \
-        /usr/local/share \
-        /usr/local/share/doc
+    # sudo chown -R $(whoami) /usr/local/bin \
+    #     /usr/local/etc \
+    #     /usr/local/sbin \
+    #     /usr/local/share \
+    #     /usr/local/share/doc
 
     # Add user write permission to these directories
-    chmod u+w /usr/local/bin \
-        /usr/local/etc \
-        /usr/local/sbin \
-        /usr/local/share \
-        /usr/local/share/doc
+    # chmod u+w /usr/local/bin \
+    #     /usr/local/etc \
+    #     /usr/local/sbin \
+    #     /usr/local/share \
+    #     /usr/local/share/doc
 
     xcode-select --install || true # required for homebrew
     echo -n "Press any key to continue after xcode installation finishes (may take 20+ minutes)."
     read -s -r
+    echo ""
 }
 
 install_homebrew() {
@@ -161,6 +160,10 @@ install_homebrew() {
     else
         info "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        info "Adding /opt/homebrew/bin to PATH."
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        info "Homebrew installation completes." 
     fi
 
     # Update homebrew recipes
@@ -213,12 +216,13 @@ install_python() {
     PYTHON_VERSION=3.10
     info "Installing Python ${PYTHON_VERSION} using pyenv..."
     pyenv install ${PYTHON_VERSION} && pyenv global ${PYTHON_VERSION}
+    eval "$(pyenv init -)"
     info "Python installation completes."
 }
 
 install_python_modules() {
     info "Installing Python modules..."
-    pip3 install --user "${PYTHON_PACKAGES[@]}"
+    pip install --user "${PYTHON_PACKAGES[@]}"
     info "Python modules installation completes."
 }
 
@@ -275,28 +279,29 @@ configure_macos() {
     # Hide recent apps from Dock
     defaults write com.apple.dock show-recents -bool false
 
+    # TODO: dockutil does not work on new MacOS (https://github.com/kcrawford/dockutil/issues/127)
     # Clean up Dock applications
-    dockutil --remove "Mail"
-    dockutil --remove "Contacts"
-    dockutil --remove "Calendar"
-    dockutil --remove "Photos"
-    dockutil --remove "Messages"
-    dockutil --remove "Maps"
-    dockutil --remove "FaceTime"
-    dockutil --remove "Photo Booth"
-    dockutil --remove "Music"
-    dockutil --remove "Podcasts"
-    dockutil --remove "TV"
-    dockutil --remove "News"
-    dockutil --remove "Books"
-    dockutil --remove "Terminal"
-    dockutil --add '' --type spacer --section apps --after "System Preferences"
-    dockutil --add "/Applications/Google Chrome.app"
-    dockutil --add "/Applications/Visual Studio Code.app"
-    dockutil --add "/Applications/Sublime Text.app"
-    dockutil --add "/Applications/iTerm.app"
-    dockutil --add "/Applications/KeePassX.app"
-    killall Dock
+    # dockutil --remove "Mail"
+    # dockutil --remove "Contacts"
+    # dockutil --remove "Calendar"
+    # dockutil --remove "Photos"
+    # dockutil --remove "Messages"
+    # dockutil --remove "Maps"
+    # dockutil --remove "FaceTime"
+    # dockutil --remove "Photo Booth"
+    # dockutil --remove "Music"
+    # dockutil --remove "Podcasts"
+    # dockutil --remove "TV"
+    # dockutil --remove "News"
+    # dockutil --remove "Books"
+    # dockutil --remove "Terminal"
+    # dockutil --add '' --type spacer --section apps --after "System Preferences"
+    # dockutil --add "/Applications/Google Chrome.app"
+    # dockutil --add "/Applications/Visual Studio Code.app"
+    # dockutil --add "/Applications/Sublime Text.app"
+    # dockutil --add "/Applications/iTerm.app"
+    # dockutil --add "/Applications/KeePassX.app"
+    # killall Dock
 
     info "macOS configuration completes."
 }
