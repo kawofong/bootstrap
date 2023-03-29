@@ -73,6 +73,7 @@ HOMEBREW_CASKS=(
     mactex
     microsoft-remote-desktop
     postman
+    rectangle
     sublime-text
     visual-studio-code
     zappy
