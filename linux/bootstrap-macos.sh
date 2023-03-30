@@ -162,9 +162,9 @@ install_homebrew() {
         info "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         info "Adding /opt/homebrew/bin to PATH."
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
         eval "$(/opt/homebrew/bin/brew shellenv)"
-        info "Homebrew installation completes." 
+        info "Homebrew installation completes."
     fi
 
     # Update homebrew recipes
@@ -235,6 +235,16 @@ install_vscode_extensions() {
         done
         info "VS Code extensions installation completes."
     fi
+}
+
+install_flutter() {
+    # Reference: https://docs.flutter.dev/get-started/install/macos
+    info "Installing Rosetta translation..."
+    softwareupdate --install-rosetta --agree-to-license
+    info "Installing Flutter..."
+    brew update && brew install --cask flutter
+    flutter doctor || true
+    info "Flutter installation completes."
 }
 
 configure_macos() {
@@ -319,6 +329,7 @@ install_python
 install_python_modules
 install_homebrew_casks
 install_vscode_extensions
+# install_flutter
 configure_macos
 
 info "You will have to re-login for new macOS configurations to take effect"

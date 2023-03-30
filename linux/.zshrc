@@ -109,7 +109,6 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -151,6 +150,13 @@ unsetopt correct_all
 # Reference: https://docs.brew.sh/Installation
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# Add Homebrew Ruby to PATH
+# Reference: https://mac.install.guide/ruby/13.html
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH=$(brew --prefix)/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -162,7 +168,7 @@ eval "$(pyenv init -)"
 
 # Add homebrew keg-only openjdk to PATH
 # Reference: https://formulae.brew.sh/formula/openjdk
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
 
 # Add gcloud components to PATH
 # Reference: https://formulae.brew.sh/cask/google-cloud-sdk
