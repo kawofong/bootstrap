@@ -3,7 +3,7 @@ alias ccat='colorize_cat' # require colorize zsh plugin
 
 # find / grep aliases
 alias fd='find . -type d -name'
-alias ff='find . -type f -name'
+# alias ff='find . -type f -name'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -43,3 +43,7 @@ alias tfo='terraform output'
 alias tfp='terraform plan'
 alias yytfa='terraform apply -auto-approve'
 alias tfaa='terraform apply -auto-approve'
+
+# Flutter aliases
+alias f='flutter'
+alias ff='flutterflow'

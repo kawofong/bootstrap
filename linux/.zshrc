@@ -170,6 +170,15 @@ eval "$(pyenv init -)"
 # Reference: https://formulae.brew.sh/formula/openjdk
 export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
 
+# Add homebrew keg-only libpq to PATH
+# Reference: https://formulae.brew.sh/formula/libpq
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+
 # Add gcloud components to PATH
 # Reference: https://formulae.brew.sh/cask/google-cloud-sdk
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+
+# Add global Dart CLI packages to PATH
+# Reference: https://dart.dev/tools/pub/cmd/pub-global#running-a-script-from-your-path
+export PATH="$PATH":"$HOME/.pub-cache/bin"
