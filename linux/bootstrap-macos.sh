@@ -63,18 +63,18 @@ HOMEBREW_FORMULAE=(
 
 HOMEBREW_CASKS=(
     docker
-    google-chrome
+    # google-chrome
     google-cloud-sdk
-    # iterm2
-    keepassx
-    mactex
-    microsoft-remote-desktop
     postman
     rectangle
     sublime-text
     visual-studio-code
     warp
     zappy
+    # iterm2
+    # keepassx
+    # mactex
+    # microsoft-remote-desktop
 )
 
 PYTHON_PACKAGES=(
@@ -159,9 +159,9 @@ install_homebrew() {
     else
         info "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        info "Adding /opt/homebrew/bin to PATH."
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        info "Running /usr/local/bin/brew shellenv."
+        echo 'eval "$(/usr/local/bin/brew shellenv)"' >>~/.zprofile
+        eval "$(/usr/local/bin/brew shellenv)"
         info "Homebrew installation completes."
     fi
 
@@ -212,7 +212,7 @@ install_zsh_extensions() {
 }
 
 install_python() {
-    PYTHON_VERSION=3.10
+    PYTHON_VERSION=3.11.6
     info "Installing Python ${PYTHON_VERSION} using pyenv..."
     pyenv install ${PYTHON_VERSION} && pyenv global ${PYTHON_VERSION}
     eval "$(pyenv init -)"
