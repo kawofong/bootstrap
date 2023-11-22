@@ -49,26 +49,23 @@ HOMEBREW_FORMULAE=(
     curl
     dockutil
     git
-    helm
     jq
-    kubectl
     poetry
     pyenv
     ruby
     shellcheck
-    terraform
     tree
     watch
     wget
     xz
-    zsh
+    # zsh
 )
 
 HOMEBREW_CASKS=(
     docker
     google-chrome
     google-cloud-sdk
-    iterm2
+    # iterm2
     keepassx
     mactex
     microsoft-remote-desktop
@@ -76,6 +73,7 @@ HOMEBREW_CASKS=(
     rectangle
     sublime-text
     visual-studio-code
+    warp
     zappy
 )
 
@@ -323,8 +321,8 @@ configure_macos() {
 setup_macos
 install_homebrew
 install_homebrew_formulae
-install_oh_my_zsh
-install_zsh_extensions
+# install_oh_my_zsh
+# install_zsh_extensions
 install_python
 install_python_modules
 install_homebrew_casks

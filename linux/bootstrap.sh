@@ -46,11 +46,11 @@ setup_dotfiles() {
 }
 
 generate_git_ssh_key() {
-    if [[ ! -f ~/.ssh/id_rsa ]]; then
+    if [[ ! -f ~/.ssh/id_ed25519 ]]; then
         info "Generating SSH key..."
-        ssh-keygen -t rsa -C "14829553+kawo123@users.noreply.github.com" -f ~/.ssh/id_rsa -N ""
+        ssh-keygen -t ed25519 -C "14829553+kawo123@users.noreply.github.com" -f ~/.ssh/id_ed25519 -N ""
         info "##### Please see below for SSH public key: "
-        cat ~/.ssh/id_rsa.pub
+        cat ~/.ssh/id_ed25519.pub
         info "##### Follow step 4 to complete: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
         info '##### After you added SSH key to your GitHub account, you can run "ssh -T git@github.com" to verify your configuration.'
     fi
