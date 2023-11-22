@@ -148,7 +148,7 @@ unsetopt correct_all
 
 # Add Homebrew to PATH after installation
 # Reference: https://docs.brew.sh/Installation
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/usr/local/bin/brew shellenv)"
 
 # Add Homebrew Ruby to PATH
 # Reference: https://mac.install.guide/ruby/13.html

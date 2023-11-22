@@ -33,7 +33,7 @@ backup_file() {
         mv "${HOME}/$1" "${HOME}/$1.bak"
         info "${HOME}/$1 backed up."
     fi
-    ln -s "${HOME}/bootstrap/linux/$1" "${HOME}/$1"
+    ln -s "$(pwd)/$1" "${HOME}/$1"
     info "Setup for $1 complete."
 }
 
@@ -90,7 +90,7 @@ fi
 # MacOS
 if [ -f "/usr/bin/sw_vers" ]; then
     info "macOS found. Bootstrapping system..."
-    source ./bootstrap-macos.sh
+    # source ./bootstrap-macos.sh
 fi
 
 setup_dotfiles
