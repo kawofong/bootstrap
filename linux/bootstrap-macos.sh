@@ -58,7 +58,7 @@ HOMEBREW_FORMULAE=(
     watch
     wget
     xz
-    # zsh
+    zsh
 )
 
 HOMEBREW_CASKS=(
@@ -92,8 +92,6 @@ VSCODE_EXTENSIONS=(
     ms-vscode-remote.remote-containers
     ms-vscode-remote.remote-ssh
     ms-vsliveshare.vsliveshare
-    shan.code-settings-sync
-    HookyQR.beautify
     tomoki1207.pdf
     visualstudioexptteam.vscodeintellicode
     wayou.vscode-todo-highlight
@@ -107,8 +105,7 @@ VSCODE_EXTENSIONS=(
     # Web / node
     Zignd.html-css-class-completion
     christian-kohler.npm-intellisense
-    dbaeumer.jshint
-    eg2.vscode-npm-script
+    dbaeumer.vscode-eslint
     mohsen1.prettify-json
     kamikillerto.vscode-colorize
     # Python
@@ -321,8 +318,8 @@ configure_macos() {
 setup_macos
 install_homebrew
 install_homebrew_formulae
-# install_oh_my_zsh
-# install_zsh_extensions
+install_oh_my_zsh
+install_zsh_extensions
 install_python
 install_python_modules
 install_homebrew_casks
