@@ -90,7 +90,7 @@ fi
 # MacOS
 if [ -f "/usr/bin/sw_vers" ]; then
     info "macOS found. Bootstrapping system..."
-    # source ./bootstrap-macos.sh
+    source ./bootstrap-macos.sh
 fi
 
 setup_dotfiles
