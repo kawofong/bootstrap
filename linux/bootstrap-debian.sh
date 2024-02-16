@@ -29,36 +29,38 @@ source ./logging.sh
 ##############################################################################
 
 PACKAGES=(
+    # Start general
     apt-transport-https
     ca-certificates
     curl
     git-all
     gnupg
     jq
-    kubectl
     lsb-release
-    nodejs
-    npm
-    openjdk-11-jdk
-    # Python 3
-    python3
-    python3-pip
-    build-essential
-    libssl-dev
-    libffi-dev
-    python3-dev
-    # end Python 3
-    software-properties-common
+    wget
     zsh
+    # End general
+    # Start pyenv
+    build-essential
+    libbz2-dev
+    libffi-dev
+    liblzma-dev
+    libncurses5-dev
+    libncursesw5-dev
+    libreadline-dev
+    libsqlite3-dev
+    libssl-dev
+    llvm
+    make
+    python3-dev
+    tk-dev
+    xz-utils
+    zlib1g-dev
+    # End pyenv
 )
 
 PYTHON_PACKAGES=(
-    autopep8
-    flake8
-    ipython
-    virtualenv
-    virtualenvwrapper
-    functions-framework
+    poetry
 )
 
 ### Function
@@ -124,16 +126,38 @@ install_google_cloud_sdk() {
     info "Google Cloud SDK installation completes."
 }
 
-install_python3_8() {
-    sudo add-apt-repository ppa:deadsnakes/ppa
-    info "Added deadsnakes Linux repository."
-    sudo apt-get update && sudo apt-get install python3.8
-    info "Python 3.8 installation completes."
+install_pyenv() {
+    PYTHON_VERSION="3.12.2"
+    info "Installing pyenv."
+    if ! command -v pyenv &> /dev/null; then
+        curl -L "https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer" | bash
+        export PATH="${PYENV_ROOT}/bin:${PATH}"
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+        pyenv install "${PYTHON_VERSION}"
+        info "pyenv installation completes."
+    else
+        info "pyenv is already installed. Skipping pyenv installation."
+    fi
+}
+
+install_python() {
+    PYTHON_VERSION="3.12.2"
+    info "Installing python @ ${PYTHON_VERSION}."
+    if ! command -v python &> /dev/null; then
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+        pyenv install "${PYTHON_VERSION}"
+        pyenv global "${PYTHON_VERSION}"
+        info "python @ ${PYTHON_VERSION} installation completes."
+    else
+        info "python is already installed. Skipping python installation."
+    fi
 }
 
 install_python_modules() {
     info "Installing Python modules..."
-    pip3 install --user "${PYTHON_PACKAGES[@]}"
+    pip3 install "${PYTHON_PACKAGES[@]}"
     info "Python modules installation completes."
 }
 
@@ -152,8 +176,10 @@ install_terraform() {
 install_apt_packages
 install_oh_my_zsh
 install_zsh_extensions
-install_docker
-install_google_cloud_sdk
-# install_python3_8 # optional. If you need python 3.8
+install_pyenv
+install_python
 install_python_modules
-install_terraform
+# install_docker
+# install_google_cloud_sdk
+# install_terraform
+

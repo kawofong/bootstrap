@@ -67,6 +67,7 @@ bootstrap_workspace() {
 
 info "Bootstrap starting. You may be asked for your password (for sudo)."
 generate_git_ssh_key
+setup_dotfiles
 bootstrap_workspace
 
 # Debian/Ubuntu based systems
@@ -76,7 +77,7 @@ if [ -f "/etc/debian_version" ]; then
         source ./bootstrap-raspbian.sh
     else
         info "Debian/Ubuntu based systems found. Bootstrapping system..."
-        # source ./bootstrap-debian.sh
+        source ./bootstrap-debian.sh
     fi
 fi
 
@@ -93,5 +94,4 @@ if [ -f "/usr/bin/sw_vers" ]; then
     source ./bootstrap-macos.sh
 fi
 
-setup_dotfiles
 info "System bootstrap complete."

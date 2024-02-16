@@ -148,7 +148,9 @@ unsetopt correct_all
 
 # Add Homebrew to PATH after installation
 # Reference: https://docs.brew.sh/Installation
-eval "$(/usr/local/bin/brew shellenv)"
+if command -v brew >/dev/null; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
 
 # Add Homebrew Ruby to PATH
 # Reference: https://mac.install.guide/ruby/13.html
@@ -162,26 +164,30 @@ fi
 
 # Set up your shell environment for Pyenv
 # Reference: https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+export PYENV_ROOT="${HOME}/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="${PYENV_ROOT}/bin:${PATH}"
+command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
 # Add homebrew keg-only openjdk to PATH
 # Reference: https://formulae.brew.sh/formula/openjdk
-export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
+if command -v brew >/dev/null; then
+  export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
+fi
 
 # Add homebrew keg-only libpq to PATH
 # Reference: https://formulae.brew.sh/formula/libpq
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+if command -v brew >/dev/null; then
+  export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+fi
 
 # Add gcloud components to PATH
 # Reference: https://formulae.brew.sh/cask/google-cloud-sdk
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-
-# Add global Dart CLI packages to PATH
-# Reference: https://dart.dev/tools/pub/cmd/pub-global#running-a-script-from-your-path
-export PATH="$PATH":"$HOME/.pub-cache/bin"
+if command -v brew >/dev/null; then
+  source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+fi
 
 # Set up direnv in zsh
 # Reference: https://direnv.net/docs/hook.html
-eval "$(direnv hook zsh)"
+if command -v direnv >/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
