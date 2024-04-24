@@ -149,7 +149,7 @@ unsetopt correct_all
 # Add Homebrew to PATH after installation
 # Reference: https://docs.brew.sh/Installation
 if command -v brew >/dev/null; then
-    eval "$(/usr/local/bin/brew shellenv)"
+    eval "$($(brew --prefix)/bin/brew shellenv)"
 fi
 
 # Add Homebrew Ruby to PATH

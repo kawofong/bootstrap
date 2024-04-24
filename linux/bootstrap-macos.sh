@@ -45,6 +45,7 @@ HOMEBREW_FORMULAE=(
     bash
     bash-completion
     cask
+    colima
     commitizen
     curl
     dockutil
@@ -157,7 +158,7 @@ install_homebrew() {
     else
         info "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        # Get the CPU architecture using uname command
+
         cpu_arch=$(uname -m)
         # Set the homebrew path depending on the CPU architecture (arm64 or x86_64)
         # because homebrew is installed to /opt/homebrew for Apple Silicon and /usr/local for macOS Intel
@@ -165,6 +166,7 @@ install_homebrew() {
         if [[ $cpu_arch == "x86_64" ]]; then
             brew_bin="/usr/local/bin"
         fi
+        
         info "Running ${brew_bin}/brew shellenv."
         echo "eval \"$(${brew_bin}/brew shellenv)\"" >>~/.zprofile
         eval "$(${brew_bin}/brew shellenv)"
