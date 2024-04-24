@@ -62,19 +62,20 @@ HOMEBREW_FORMULAE=(
 )
 
 HOMEBREW_CASKS=(
-    docker
-    # google-chrome
+    google-chrome
     google-cloud-sdk
-    postman
     rectangle
-    sublime-text
     visual-studio-code
     warp
     zappy
+    # docker
     # iterm2
     # keepassx
+    # loom
     # mactex
     # microsoft-remote-desktop
+    # postman
+    # sublime-text
 )
 
 PYTHON_PACKAGES=(
@@ -156,9 +157,17 @@ install_homebrew() {
     else
         info "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        info "Running /usr/local/bin/brew shellenv."
-        echo 'eval "$(/usr/local/bin/brew shellenv)"' >>~/.zprofile
-        eval "$(/usr/local/bin/brew shellenv)"
+        # Get the CPU architecture using uname command
+        cpu_arch=$(uname -m)
+        # Set the homebrew path depending on the CPU architecture (arm64 or x86_64)
+        # because homebrew is installed to /opt/homebrew for Apple Silicon and /usr/local for macOS Intel
+        brew_bin="/opt/homebrew/bin"
+        if [[ $cpu_arch == "x86_64" ]]; then
+            brew_bin="/usr/local/bin"
+        fi
+        info "Running ${brew_bin}/brew shellenv."
+        echo "eval \"$(${brew_bin}/brew shellenv)\"" >>~/.zprofile
+        eval "$(${brew_bin}/brew shellenv)"
         info "Homebrew installation completes."
     fi
 
