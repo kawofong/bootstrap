@@ -1,0 +1,72 @@
+# https://github.com/Homebrew/homebrew-bundle
+
+# set arguments for all 'brew install --cask' commands
+cask_args appdir: "~/Applications"
+
+# 'brew install' formulae
+brew "bash"
+brew "bash-completion"
+brew "colima"
+brew "curl"
+brew "dockutil"
+brew "git"
+brew "jq"
+brew "poetry"
+brew "pyenv"
+brew "tree"
+brew "watch"
+brew "wget"
+brew "zsh"
+
+# 'brew install --cask' casks
+cask "google-chrome"
+cask "google-cloud-sdk"
+cask "rectangle"
+cask "texshop"
+cask "visual-studio-code"
+cask "warp"
+cask "zappy"
+
+# 'vscode --install-extension' extensions
+# General
+vscode "christian-kohler.path-intellisense"
+vscode "EditorConfig.EditorConfig"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "tomoki1207.pdf"
+vscode "visualstudioexptteam.vscodeintellicode"
+vscode "wayou.vscode-todo-highlight"
+# Git
+vscode "codezombiech.gitignore"
+vscode "donjayamanne.githistory"
+vscode "eamodio.gitlens"
+vscode "waderyan.gitblame"
+# Markdown
+vscode "yzhang.markdown-all-in-one"
+# Web / node
+vscode "Zignd.html-css-class-completion"
+vscode "christian-kohler.npm-intellisense"
+vscode "dbaeumer.vscode-eslint"
+vscode "mohsen1.prettify-json"
+vscode "kamikillerto.vscode-colorize"
+# Python
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+# Shell
+vscode "foxundermoon.shell-format"
+vscode "timonwong.shellcheck"
+# Kubernetes
+vscode "ipedrazas.kubernetes-snippets"
+vscode "ms-azuretools.vscode-docker"
+# Terraform
+vscode "hashicorp.terraform"
+# Theme
+vscode "nimda.deepdark-material"
+vscode "pkief.material-icon-theme"
+
+# 'mas install' apps
+# mas "1Password", id: 443_987_910
+
+# 'whalebrew install' containers
+# whalebrew "whalebrew/wget"

@@ -62,68 +62,12 @@ HOMEBREW_FORMULAE=(
     zsh
 )
 
-HOMEBREW_CASKS=(
-    google-chrome
-    google-cloud-sdk
-    rectangle
-    visual-studio-code
-    warp
-    zappy
-    # docker
-    # iterm2
-    # keepassx
-    # loom
-    # mactex
-    # microsoft-remote-desktop
-    # postman
-    # sublime-text
-)
-
 PYTHON_PACKAGES=(
     autopep8
     flake8
     ipython
     virtualenv
     virtualenvwrapper
-)
-
-VSCODE_EXTENSIONS=(
-    # General
-    christian-kohler.path-intellisense
-    EditorConfig.EditorConfig
-    ms-vscode-remote.remote-containers
-    ms-vscode-remote.remote-ssh
-    ms-vsliveshare.vsliveshare
-    tomoki1207.pdf
-    visualstudioexptteam.vscodeintellicode
-    wayou.vscode-todo-highlight
-    # Git
-    codezombiech.gitignore
-    donjayamanne.githistory
-    eamodio.gitlens
-    waderyan.gitblame
-    # Markdown
-    yzhang.markdown-all-in-one
-    # Web / node
-    Zignd.html-css-class-completion
-    christian-kohler.npm-intellisense
-    dbaeumer.vscode-eslint
-    mohsen1.prettify-json
-    kamikillerto.vscode-colorize
-    # Python
-    ms-python.python
-    ms-python.vscode-pylance
-    # Shell
-    foxundermoon.shell-format
-    timonwong.shellcheck
-    # Kubernetes
-    ipedrazas.kubernetes-snippets
-    ms-azuretools.vscode-docker
-    # Terraform
-    hashicorp.terraform
-    # Theme
-    nimda.deepdark-material
-    pkief.material-icon-theme
 )
 
 ### Function
@@ -166,7 +110,7 @@ install_homebrew() {
         if [[ $cpu_arch == "x86_64" ]]; then
             brew_bin="/usr/local/bin"
         fi
-        
+
         info "Running ${brew_bin}/brew shellenv."
         echo "eval \"$(${brew_bin}/brew shellenv)\"" >>~/.zprofile
         eval "$(${brew_bin}/brew shellenv)"
@@ -178,16 +122,10 @@ install_homebrew() {
     brew upgrade
 }
 
-install_homebrew_formulae() {
-    info "Installing Homebrew formulae..."
-    brew install "${HOMEBREW_FORMULAE[@]}"
-    info "Homebrew formulae installation completes."
-}
-
-install_homebrew_casks() {
-    info "Installing Homebrew casks..."
-    brew install --cask "${HOMEBREW_CASKS[@]}"
-    info "Homebrew casks installation completes."
+install_homebrew_bundle() {
+    info "Installing Homebrew bundle..."
+    brew bundle install --file=./Brewfile
+    info "Homebrew bundle installation completes."
 }
 
 install_oh_my_zsh() {
@@ -220,7 +158,7 @@ install_zsh_extensions() {
 }
 
 install_python() {
-    PYTHON_VERSION=3.11.6
+    PYTHON_VERSION=3.13.2
     info "Installing Python ${PYTHON_VERSION} using pyenv..."
     pyenv install ${PYTHON_VERSION} && pyenv global ${PYTHON_VERSION}
     eval "$(pyenv init -)"
@@ -231,26 +169,6 @@ install_python_modules() {
     info "Installing Python modules..."
     pip install --user "${PYTHON_PACKAGES[@]}"
     info "Python modules installation completes."
-}
-
-install_vscode_extensions() {
-    if hash code &>/dev/null; then
-        info "Installing VS Code extensions..."
-        for i in "${VSCODE_EXTENSIONS[@]}"; do
-            code --install-extension "$i"
-        done
-        info "VS Code extensions installation completes."
-    fi
-}
-
-install_flutter() {
-    # Reference: https://docs.flutter.dev/get-started/install/macos
-    info "Installing Rosetta translation..."
-    softwareupdate --install-rosetta --agree-to-license
-    info "Installing Flutter..."
-    brew update && brew install --cask flutter
-    flutter doctor || true
-    info "Flutter installation completes."
 }
 
 configure_macos() {
@@ -328,13 +246,11 @@ configure_macos() {
 
 setup_macos
 install_homebrew
-install_homebrew_formulae
+install_homebrew_bundle
 install_oh_my_zsh
 install_zsh_extensions
 install_python
 install_python_modules
-install_homebrew_casks
-install_vscode_extensions
 # install_flutter
 configure_macos
 
