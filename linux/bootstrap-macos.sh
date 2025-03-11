@@ -251,7 +251,6 @@ install_oh_my_zsh
 install_zsh_extensions
 install_python
 install_python_modules
-# install_flutter
 configure_macos
 
 info "You will have to re-login for new macOS configurations to take effect"
