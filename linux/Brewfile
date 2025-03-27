@@ -12,9 +12,10 @@ brew "docker"
 brew "dockutil"
 brew "git"
 brew "jq"
+brew "pnpm" # faster version of npm
 brew "pyenv"
 brew "tree"
-brew "uv"
+brew "uv" # faster version of pip
 brew "watch"
 brew "wget"
 brew "zsh"
