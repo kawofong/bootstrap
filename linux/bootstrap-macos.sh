@@ -178,10 +178,16 @@ configure_macos() {
     # KeyRepeat: 120, 90, 60, 30, 12, 6, 2
     # InitialKeyRepeat: 120, 94, 68, 35, 25, 15
     defaults write NSGlobalDomain KeyRepeat -int 2
-    defaults write NSGlobalDomain InitialKeyRepeat -int 35
+    defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
     # Set Dark theme
     defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
+    # Add input sources; use `defaults read com.apple.HIToolbox AppleEnabledInputSources`
+    # to read system input sources
+    # TODO: running this multiple times may cause duplicate entries in system input sources
+    defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>Bundle ID</key><string>com.apple.inputmethod.TCIM</string><key>InputSourceKind</key><string>Keyboard Input Method</string></dict>'
+    defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>Bundle ID</key><string>com.apple.inputmethod.TCIM</string><key>Input Mode</key><string>com.apple.inputmethod.TCIM.Pinyin</string><key>InputSourceKind</key><string>Input Mode</string></dict>'
 
     # Always show scrollbars
     defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
